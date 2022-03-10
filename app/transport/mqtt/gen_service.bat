@@ -1,1 +1,0 @@
-kratos proto server ../../../api/transport/mqtt/v1/mqtt.proto -t internal/service
