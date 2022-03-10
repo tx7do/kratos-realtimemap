@@ -23,7 +23,7 @@ export interface HubConnection {
 export const connectToHub = async (): Promise<HubConnection> => {
 
   const connection = new HubConnectionBuilder()
-    .withUrl('http://localhost:5000/events')
+    .withUrl('http://localhost:8800/events')
     .configureLogging(LogLevel.Debug)
     .withAutomaticReconnect()
     .build();

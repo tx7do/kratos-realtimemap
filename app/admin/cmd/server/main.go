@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/tx7do/kratos-transport/transport/mqtt"
 	"kratos-realtimemap/app/admin/internal/conf"
 	"kratos-realtimemap/pkg/util/bootstrap"
 
@@ -27,7 +28,7 @@ func init() {
 	Flags.Init()
 }
 
-func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, rr registry.Registrar) *kratos.App {
+func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, ms *mqtt.Server, rr registry.Registrar) *kratos.App {
 	return kratos.New(
 		kratos.ID(Service.GetInstanceId()),
 		kratos.Name(Service.Name),
@@ -37,6 +38,7 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, rr registry.Reg
 		kratos.Server(
 			hs,
 			gs,
+			ms,
 		),
 		kratos.Registrar(rr),
 	)

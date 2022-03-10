@@ -21,8 +21,9 @@ func initApp(confServer *conf.Server, registry *conf.Registry, auth *conf.Auth, 
 	adminService := service.NewAdminService(logger)
 	httpServer := server.NewHTTPServer(confServer, auth, logger, adminService)
 	grpcServer := server.NewGRPCServer(confServer, logger, adminService)
+	mqttServer := server.NewMQTTServer(confServer, logger, adminService)
 	registrar := server.NewRegistrar(registry)
-	app := newApp(logger, httpServer, grpcServer, registrar)
+	app := newApp(logger, httpServer, grpcServer, mqttServer, registrar)
 	return app, func() {
 	}, nil
 }
