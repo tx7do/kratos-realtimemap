@@ -1,5 +1,5 @@
-import { HubConnection } from "@/hub";
-import { throttle } from "lodash";
+import { HubConnection } from '@/hub';
+import { throttle } from 'lodash';
 
 export const handleViewportUpdates = (map: mapboxgl.Map, connection: HubConnection) => {
 
@@ -15,10 +15,10 @@ export const handleViewportUpdates = (map: mapboxgl.Map, connection: HubConnecti
 
   setTimeout(
     () => setViewport(map, connection),
-    500
+    500,
   );
 
-}
+};
 
 function setViewport(map: mapboxgl.Map, connection: HubConnection) {
   const bounds = map.getBounds();

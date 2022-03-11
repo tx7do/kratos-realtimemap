@@ -33,10 +33,17 @@ message Server {
   message Kafka {
     repeated string addrs = 1;
   }
+  message Websocket {
+    string network = 1;
+    string addr = 2;
+    string path = 3;
+    google.protobuf.Duration timeout = 4;
+  }
   HTTP http = 1;
   GRPC grpc = 2;
   Mqtt mqtt = 3;
   Kafka kafka = 4;
+  Websocket websocket = 5;
 }
 
 message Data {

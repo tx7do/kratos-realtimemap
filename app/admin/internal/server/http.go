@@ -2,10 +2,6 @@ package server
 
 import (
 	"context"
-	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
-
-	jwtv4 "github.com/golang-jwt/jwt/v4"
-
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/go-kratos/swagger-api/openapiv2"
@@ -41,13 +37,13 @@ func NewMiddleware(ac *conf.Auth, logger log.Logger) http.ServerOption {
 		recovery.Recovery(),
 		tracing.Server(),
 		logging.Server(logger),
-		selector.Server(
-			jwt.Server(func(token *jwtv4.Token) (interface{}, error) {
-				return []byte(ac.ApiKey), nil
-			}, jwt.WithSigningMethod(jwtv4.SigningMethodHS256)),
-		).
-			Match(NewWhiteListMatcher()).
-			Build(),
+		//selector.Server(
+		//	jwt.Server(func(token *jwtv4.Token) (interface{}, error) {
+		//		return []byte(ac.ApiKey), nil
+		//	}, jwt.WithSigningMethod(jwtv4.SigningMethodHS256)),
+		//).
+		//	Match(NewWhiteListMatcher()).
+		//	Build(),
 	)
 }
 
@@ -56,7 +52,8 @@ func NewHTTPServer(c *conf.Server, ac *conf.Auth, logger log.Logger, s *service.
 	var opts = []http.ServerOption{
 		NewMiddleware(ac, logger),
 		http.Filter(handlers.CORS(
-			handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}),
+			handlers.AllowedHeaders([]string{"" +
+				"", "Content-Type", "Authorization"}),
 			handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}),
 			handlers.AllowedOrigins([]string{"*"}),
 		)),

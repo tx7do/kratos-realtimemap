@@ -1,6 +1,6 @@
 import { PositionDto } from '@/hub';
 import { getBoundsWithMargin } from './boundsWithMargin';
-import { GeoJSONSourceData } from "./mapUtils";
+import { GeoJSONSourceData } from './mapUtils';
 
 // const stepsInAnimation = 10;
 
@@ -47,14 +47,14 @@ function createVehicleFromState(e: PositionDto): VehicleState {
 
 function updateVehicleFromEvent(
   vehicleStates: VehicleStates,
-  positionDto: PositionDto
+  positionDto: PositionDto,
 ) {
   const vehicleState = vehicleStates[positionDto.vehicleId];
 
   vehicleState.currentPosition = {
     lat: positionDto.latitude,
     lng: positionDto.longitude,
-    heading: positionDto.heading
+    heading: positionDto.heading,
   };
 
   // console.log(positionDto.vehicleId)
@@ -112,7 +112,7 @@ function updateVehicleFromEvent(
 
 export function mapVehiclesToGeoJson(
   vehicleStates: VehicleStates,
-  predicate: (vehicleState: VehicleState) => boolean
+  predicate: (vehicleState: VehicleState) => boolean,
 ): GeoJSONSourceData {
   return {
     type: 'FeatureCollection',

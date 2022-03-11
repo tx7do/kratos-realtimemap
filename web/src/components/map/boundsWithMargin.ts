@@ -1,4 +1,4 @@
-import mapboxgl from "mapbox-gl";
+import mapboxgl from 'mapbox-gl';
 
 export function getBoundsWithMargin(map: mapboxgl.Map) {
 
@@ -15,6 +15,6 @@ export function getBoundsWithMargin(map: mapboxgl.Map) {
 
   return new mapboxgl.LngLatBounds(
     { lat: sw.lat - latMargin, lng: sw.lng - lngMargin },
-    { lat: ne.lat + latMargin, lng: ne.lng + lngMargin }
+    { lat: ne.lat + latMargin, lng: ne.lng + lngMargin },
   );
 }

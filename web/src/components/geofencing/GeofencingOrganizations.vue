@@ -1,23 +1,24 @@
 <template>
-  <div class="m-3">
-    <h2 class="mt-0 mb-0">
+  <div class='m-3'>
+    <h2 class='mt-0 mb-0'>
       Geofencing
     </h2>
-    <div class="mt-6">
-      <div class="p-field">
-        <span class="p-float-label">
-          <Dropdown id="organization-select" v-model="selectedItem" :options="organizations" optionLabel="name" />
-          <label for="organization-select">Select an organization</label>
+    <div class='mt-6'>
+      <div class='p-field'>
+        <span class='p-float-label'>
+          <Dropdown id='organization-select' v-model='selectedItem' :options='organizations'
+                    optionLabel='name' />
+          <label for='organization-select'>Select an organization</label>
         </span>
       </div>
     </div>
-    <div class="mt-5" v-if="details">
-      <OrganizationDetails :details="details" />
+    <div class='mt-5' v-if='details'>
+      <OrganizationDetails :details='details' />
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent } from 'vue';
 import {
   browseOrganizations,
@@ -41,7 +42,7 @@ export default defineComponent({
       if (selectedOrganization) {
         this.getDetails(selectedOrganization.id);
       }
-    }
+    },
   },
 
   components: {
@@ -64,10 +65,10 @@ export default defineComponent({
         .map(geofence => ({
           long: geofence.longitude,
           lat: geofence.latitude,
-          radiusInMeters: geofence.radiusInMeters
+          radiusInMeters: geofence.radiusInMeters,
         }));
 
-      this.$emit("geofences-updated", geofences);
+      this.$emit('geofences-updated', geofences);
     },
   },
 
@@ -76,6 +77,6 @@ export default defineComponent({
 
 <style scoped>
 .p-dropdown {
-    width: 100%;
+  width: 100%;
 }
 </style>

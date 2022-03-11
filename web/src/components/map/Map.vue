@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div id="map"></div>
+    <div id='map'></div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent, PropType } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxConfig from '@/mapboxConfig';
 import { addVehicleTrailLayer } from './vehicleTrailsLayer';
 import { addGeofencesLayer, Geofence, setGeofences } from './geofencesLayer';
-import { VehicleStates, handlePositionEvent, clearVehiclesOutsideOfViewbox } from "./vehicleStates";
+import { VehicleStates, handlePositionEvent, clearVehiclesOutsideOfViewbox } from './vehicleStates';
 import { addVehicleDetailsPopup } from './vehicleDetailsPopup';
 import { addVehiclesLayer } from './vehiclesLayer';
 import { addVehicleClustersLayer } from './vehicleClustersLayer';
 import { handleViewportUpdates } from './viewportUpdates';
-import { HubConnection} from "@/hub";
+import { HubConnection } from '@/hub';
 
 export default defineComponent({
   name: 'Map',
@@ -24,19 +24,19 @@ export default defineComponent({
   props: {
     geofences: {
       type: Array as PropType<Geofence[]>,
-      require: true
+      require: true,
     },
     hubConnection: {
       type: Object as PropType<HubConnection>,
-      require: true
-    }
+      require: true,
+    },
   },
 
   data() {
     return {
       // it will be set in mounted and available later on
-      map: undefined as unknown as mapboxgl.Map
-    }
+      map: undefined as unknown as mapboxgl.Map,
+    };
   },
 
   mounted() {
@@ -51,12 +51,12 @@ export default defineComponent({
 
     const vehicleStates: VehicleStates = {};
 
-    if(this.hubConnection !== undefined) {
+    if (this.hubConnection !== undefined) {
       this.hubConnection.onPositions(positions => {
-        for(const position of positions.positions) {
+        for (const position of positions.positions) {
           handlePositionEvent(vehicleStates, position);
         }
-      })
+      });
 
     }
 
@@ -69,12 +69,12 @@ export default defineComponent({
 
       addVehicleDetailsPopup(this.map);
 
-      if(this.hubConnection !== undefined)
+      if (this.hubConnection !== undefined)
         handleViewportUpdates(this.map, this.hubConnection);
 
       setInterval(
         () => clearVehiclesOutsideOfViewbox(this.map, vehicleStates),
-        5000
+        5000,
       );
 
     });
@@ -84,8 +84,8 @@ export default defineComponent({
   watch: {
     geofences(newGeofences: Geofence[] | undefined) {
       setGeofences(this.map, newGeofences);
-    }
-  }
+    },
+  },
 
 });
 </script>

@@ -1,9 +1,9 @@
-import { GetTrail } from "@/components/map/api-trail";
-import mapboxgl from "mapbox-gl";
-import { trySetGeoJsonSource } from "./mapUtils";
-import { vehicleLayerId } from "./vehiclesLayer";
+import { GetTrail } from '@/components/map/api-trail';
+import mapboxgl from 'mapbox-gl';
+import { trySetGeoJsonSource } from './mapUtils';
+import { vehicleLayerId } from './vehiclesLayer';
 
-const vehicleTrailSourceId = "vehicle-trails";
+const vehicleTrailSourceId = 'vehicle-trails';
 
 export const addVehicleTrailLayer = async (map: mapboxgl.Map) => {
 
@@ -67,7 +67,7 @@ export const addVehicleTrailLayer = async (map: mapboxgl.Map) => {
 
   setInterval(
     () => drawCurrentlySelectedVehicleTrail(),
-    2500
+    2500,
   );
 
-}
+};

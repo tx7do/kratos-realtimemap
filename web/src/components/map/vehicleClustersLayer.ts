@@ -1,8 +1,8 @@
-import { VehicleStates, mapVehiclesToGeoJson } from "./vehicleStates";
-import { trySetGeoJsonSource } from "./mapUtils";
-import { showMarkerLevel } from "./vehiclesLayer";
+import { VehicleStates, mapVehiclesToGeoJson } from './vehicleStates';
+import { trySetGeoJsonSource } from './mapUtils';
+import { showMarkerLevel } from './vehiclesLayer';
 
-const vehicleClusterSourceId = "vehicle-clusters";
+const vehicleClusterSourceId = 'vehicle-clusters';
 
 export const addVehicleClustersLayer = (map: mapboxgl.Map, vehicleStates: VehicleStates) => {
 
@@ -18,7 +18,7 @@ export const addVehicleClustersLayer = (map: mapboxgl.Map, vehicleStates: Vehicl
   });
 
   map.addLayer({
-    id: "vehicle-cluster-layer",
+    id: 'vehicle-cluster-layer',
     type: 'circle',
     source: vehicleClusterSourceId,
     maxzoom: showMarkerLevel,
@@ -55,10 +55,10 @@ export const addVehicleClustersLayer = (map: mapboxgl.Map, vehicleStates: Vehicl
 
   setInterval(
     () => updateClusterLayers(map, vehicleStates),
-    5000
+    5000,
   );
 
-}
+};
 
 function updateClusterLayers(map: mapboxgl.Map, vehicleStates: VehicleStates) {
   const data = mapVehiclesToGeoJson(vehicleStates, () => true);

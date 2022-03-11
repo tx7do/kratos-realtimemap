@@ -7,6 +7,10 @@ server:
   grpc:
     addr: 0.0.0.0:9900
     timeout: 1s
+  websocket:
+    addr: 0.0.0.0:7700
+    timeout: 1s
+    path: /
   mqtt:
     addr: ssl://mqtt.hsl.fi:8883
   kafka:

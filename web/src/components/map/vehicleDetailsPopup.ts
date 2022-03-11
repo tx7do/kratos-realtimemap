@@ -1,6 +1,6 @@
-import mapboxgl from "mapbox-gl";
-import { Point } from "geojson";
-import { vehicleLayerId } from "./vehiclesLayer";
+import mapboxgl from 'mapbox-gl';
+import { Point } from 'geojson';
+import { vehicleLayerId } from './vehiclesLayer';
 
 export const addVehicleDetailsPopup = (map: mapboxgl.Map) => {
 
@@ -30,9 +30,9 @@ export const addVehicleDetailsPopup = (map: mapboxgl.Map) => {
     popup.setLngLat(coordinates).setHTML(description).addTo(map);
   });
 
-  map.on('mouseleave', vehicleLayerId, function () {
+  map.on('mouseleave', vehicleLayerId, function() {
     map.getCanvas().style.cursor = '';
     popup.remove();
   });
 
-}
+};

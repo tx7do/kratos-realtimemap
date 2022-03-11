@@ -4,6 +4,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 	"github.com/tx7do/kratos-transport/broker"
+	"github.com/tx7do/kratos-transport/transport/websocket"
 	v1 "kratos-realtimemap/api/admin/v1"
 )
 
@@ -17,6 +18,7 @@ type AdminService struct {
 
 	mb broker.Broker
 	kb broker.Broker
+	ws *websocket.Server
 
 	positionHistory map[string][]*v1.Position
 }

@@ -1,23 +1,24 @@
 <template>
-  <div class="min-h-screen flex flex-column">
-    <GeofencingNotifications v-if="hubConnection" :hubConnection="hubConnection" />
+  <div class='min-h-screen flex flex-column'>
+    <GeofencingNotifications v-if='hubConnection' :hubConnection='hubConnection' />
     <TopBar />
-    <div class="flex-1 flex flex-row">
-      <Map v-if="hubConnection" class="flex-1" :geofences="geofences" :hubConnection="hubConnection" />
-      <GeofencingPanel class="flex-1" @geofences-updated="geofences = $event" />
+    <div class='flex-1 flex flex-row'>
+      <Map v-if='hubConnection' class='flex-1' :geofences='geofences'
+           :hubConnection='hubConnection' />
+      <GeofencingPanel class='flex-1' @geofences-updated='geofences = $event' />
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent } from 'vue';
 
 import TopBar from './components/TopBar.vue';
 import Map from './components/map/Map.vue';
 import GeofencingPanel from './components/geofencing/GeofencingPanel.vue';
 import GeofencingNotifications from './components/geofencing/GeofencingNotifications.vue';
-import { Geofence } from "./components/map/geofencesLayer";
-import {connectToHub, HubConnection} from "@/hub";
+import { Geofence } from './components/map/geofencesLayer';
+import { connectToHub, HubConnection } from '@/hub';
 
 export default defineComponent({
 
@@ -38,7 +39,7 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.hubConnection = await connectToHub();
+    this.hubConnection = await new connectToHub();
   },
 
   async unmounted() {

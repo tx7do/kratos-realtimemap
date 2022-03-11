@@ -1,4 +1,4 @@
-import apiInstance from '../../services/api-base';
+import { apiInstance } from '@/services/api-base';
 
 export interface OrganizationDto {
   id: string;
@@ -23,7 +23,7 @@ export const browseOrganizations = async (): Promise<OrganizationDto[]> => {
 };
 
 export const getDetails = async (
-  id: string
+  id: string,
 ): Promise<OrganizationDetailsDto> => {
   const res = await apiInstance.get(`organization/${id}`);
   return res?.data as OrganizationDetailsDto;

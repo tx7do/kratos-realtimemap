@@ -12,12 +12,12 @@ require (
 	github.com/google/wire v0.5.0
 	github.com/hashicorp/consul/api v1.11.0
 	github.com/nacos-group/nacos-sdk-go v1.1.0
-	github.com/tx7do/kratos-transport v0.0.0-20220310070329-44410a60eef2
+	github.com/tx7do/kratos-transport v0.0.0-20220311112558-6f6eb3c407b8
 	go.etcd.io/etcd/client/v3 v3.5.2
 	go.opentelemetry.io/otel v1.3.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.0.0
 	go.opentelemetry.io/otel/sdk v1.3.0
-	google.golang.org/grpc v1.44.0
+	google.golang.org/grpc v1.45.0
 	google.golang.org/protobuf v1.27.1
 )
 
@@ -45,6 +45,6 @@ require (
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/stretchr/objx v0.3.0 // indirect
 	github.com/ziutek/mymysql v1.5.4 // indirect
-	google.golang.org/genproto v0.0.0-20220308174144-ae0e22291548
+	google.golang.org/genproto v0.0.0-20220310185008-1973136f34c6
 	gopkg.in/ini.v1 v1.51.0 // indirect
 )

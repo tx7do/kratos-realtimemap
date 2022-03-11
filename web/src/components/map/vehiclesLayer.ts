@@ -1,11 +1,11 @@
-import { VehicleStates, mapVehiclesToGeoJson } from "./vehicleStates";
+import { VehicleStates, mapVehiclesToGeoJson } from './vehicleStates';
 import { getBoundsWithMargin } from './boundsWithMargin';
-import { trySetGeoJsonSource } from "./mapUtils";
+import { trySetGeoJsonSource } from './mapUtils';
 
 export const showMarkerLevel = 12;
 
-const vehicleSourceId = "vehicles";
-export const vehicleLayerId = "vehicle-layer";
+const vehicleSourceId = 'vehicles';
+export const vehicleLayerId = 'vehicle-layer';
 
 export const addVehiclesLayer = (map: mapboxgl.Map, vehicleStates: VehicleStates) => {
 
@@ -42,10 +42,10 @@ export const addVehiclesLayer = (map: mapboxgl.Map, vehicleStates: VehicleStates
 
   setInterval(
     () => updateVehicleLayers(map, vehicleStates),
-    1000
+    1000,
   );
 
-}
+};
 
 function updateVehicleLayers(map: mapboxgl.Map, vehicleStates: VehicleStates) {
   if (map.getZoom() < showMarkerLevel) {
@@ -56,7 +56,7 @@ function updateVehicleLayers(map: mapboxgl.Map, vehicleStates: VehicleStates) {
   const biggerBounds = getBoundsWithMargin(map);
 
   const data = mapVehiclesToGeoJson(vehicleStates, vehicle =>
-    biggerBounds.contains(vehicle.currentPosition)
+    biggerBounds.contains(vehicle.currentPosition),
   );
 
   trySetGeoJsonSource(map, vehicleSourceId, data);
