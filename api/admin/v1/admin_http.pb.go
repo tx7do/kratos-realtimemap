@@ -27,7 +27,7 @@ type AdminHTTPServer interface {
 func RegisterAdminHTTPServer(s *http.Server, srv AdminHTTPServer) {
 	r := s.Route("/")
 	r.GET("/api/organization", _Admin_GetOrganizations0_HTTP_Handler(srv))
-	r.GET("/api/organization/{id}", _Admin_GetGeofences0_HTTP_Handler(srv))
+	r.GET("/api/organization/{org_id}", _Admin_GetGeofences0_HTTP_Handler(srv))
 	r.GET("/api/trail/{id}", _Admin_GetPositionsHistory0_HTTP_Handler(srv))
 }
 
@@ -110,7 +110,7 @@ func NewAdminHTTPClient(client *http.Client) AdminHTTPClient {
 
 func (c *AdminHTTPClientImpl) GetGeofences(ctx context.Context, in *GetGeofencesReq, opts ...http.CallOption) (*GetGetGeofencesReply, error) {
 	var out GetGetGeofencesReply
-	pattern := "/api/organization/{id}"
+	pattern := "/api/organization/{org_id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation("/admin.v1.Admin/GetGeofences"))
 	opts = append(opts, http.PathTemplate(pattern))

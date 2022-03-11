@@ -29,11 +29,11 @@ func (s *AdminService) GetOrganizations(ctx context.Context, _ *emptypb.Empty) (
 }
 
 func (s *AdminService) GetGeofences(ctx context.Context, req *v1.GetGeofencesReq) (*v1.GetGetGeofencesReply, error) {
-	if org, ok := data.AllOrganizations[req.Id]; ok {
+	if org, ok := data.AllOrganizations[req.OrgId]; ok {
 
 		return mapOrganization(org), nil
 	} else {
-		return nil, v1.ErrorResourceNotFound(fmt.Sprintf("Organization %s not found", req.Id))
+		return nil, v1.ErrorResourceNotFound(fmt.Sprintf("Organization %s not found", req.OrgId))
 	}
 }
 

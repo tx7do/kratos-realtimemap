@@ -53,7 +53,7 @@ export default defineComponent({
 
     if (this.hubConnection !== undefined) {
       this.hubConnection.onPositions(positions => {
-        for (const position of positions.positions) {
+        for (const position of positions) {
           handlePositionEvent(vehicleStates, position);
         }
       });

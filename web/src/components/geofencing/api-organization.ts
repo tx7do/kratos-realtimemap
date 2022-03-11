@@ -1,8 +1,8 @@
 import { apiInstance } from '@/services/api-base';
 
 export interface OrganizationDto {
-  id: string;
-  name: string;
+  Id: string;
+  Name: string;
 }
 
 export interface GeofenceDto {
@@ -14,12 +14,12 @@ export interface GeofenceDto {
 }
 
 export interface OrganizationDetailsDto extends OrganizationDto {
-  geofences: GeofenceDto[];
+  Geofences: GeofenceDto[];
 }
 
 export const browseOrganizations = async (): Promise<OrganizationDto[]> => {
   const res = await apiInstance.get('organization');
-  return res?.data as OrganizationDto[];
+  return res?.data['Organizations'] as OrganizationDto[];
 };
 
 export const getDetails = async (

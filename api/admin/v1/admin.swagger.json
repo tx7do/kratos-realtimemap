@@ -38,7 +38,7 @@
         ]
       }
     },
-    "/api/organization/{id}": {
+    "/api/organization/{org_id}": {
       "get": {
         "operationId": "Admin_GetGeofences",
         "responses": {
@@ -57,7 +57,7 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "org_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -130,22 +130,25 @@
     "v1Geofence": {
       "type": "object",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Longitude": {
+        "radius_in_meters": {
           "type": "number",
           "format": "double"
         },
-        "Latitude": {
+        "longitude": {
           "type": "number",
           "format": "double"
         },
-        "RadiusInMeters": {
+        "latitude": {
           "type": "number",
           "format": "double"
         },
-        "VehiclesInZone": {
+        "org_id": {
+          "type": "string"
+        },
+        "vehicles_in_zone": {
           "type": "array",
           "items": {
             "type": "string"
@@ -195,10 +198,10 @@
     "v1Organization": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         }
       }
@@ -206,32 +209,32 @@
     "v1Position": {
       "type": "object",
       "properties": {
-        "VehicleId": {
+        "vehicle_id": {
           "type": "string"
         },
-        "OrgId": {
+        "org_id": {
           "type": "string"
         },
-        "Timestamp": {
+        "timestamp": {
           "type": "string",
           "format": "int64"
         },
-        "Longitude": {
+        "longitude": {
           "type": "number",
           "format": "double"
         },
-        "Latitude": {
+        "latitude": {
           "type": "number",
           "format": "double"
         },
-        "Heading": {
+        "heading": {
           "type": "integer",
           "format": "int32"
         },
-        "DoorsOpen": {
+        "doors_open": {
           "type": "boolean"
         },
-        "Speed": {
+        "speed": {
           "type": "number",
           "format": "double"
         }

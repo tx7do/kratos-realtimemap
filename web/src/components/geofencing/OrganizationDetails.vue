@@ -1,6 +1,6 @@
 <template>
   <h3>Geofencing zones:</h3>
-  <div v-for='geofence in details.geofences' v-bind:key='geofence.name'>
+  <div v-for='geofence in details.Geofences' v-bind:key='geofence.name'>
     <GeofenceDetails :geofence='geofence'></GeofenceDetails>
   </div>
 </template>

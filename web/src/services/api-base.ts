@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import {deepMerge} from '@/util';
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {

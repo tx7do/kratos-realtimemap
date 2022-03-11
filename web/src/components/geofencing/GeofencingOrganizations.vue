@@ -56,12 +56,13 @@ export default defineComponent({
   methods: {
     async fetchData() {
       this.organizations = await browseOrganizations();
+      // console.log(this.organizations)
     },
     async getDetails(id: string) {
       this.details = await getDetails(id);
 
       const geofences = this.details
-        .geofences
+        .Geofences
         .map(geofence => ({
           long: geofence.longitude,
           lat: geofence.latitude,

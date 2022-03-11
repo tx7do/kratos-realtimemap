@@ -82,6 +82,8 @@ func (s *AdminService) UpdatePositionHistory(position *v1.Position) {
 		s.positionHistory[position.VehicleId] = s.positionHistory[position.VehicleId][1:]
 	}
 	s.positionHistory[position.VehicleId] = append(s.positionHistory[position.VehicleId], position)
+
+	s.BroadcastToWebsocketClient("positions", s.positionHistory[position.VehicleId])
 }
 
 func MapToPosition(e *hfp.Event) *v1.Position {
