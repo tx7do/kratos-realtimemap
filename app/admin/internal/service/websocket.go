@@ -18,7 +18,7 @@ type WebsocketProto struct {
 }
 
 func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocket.Message) (*websocket.Message, error) {
-	fmt.Printf("[%s] Payload: %s\n", connectionId, string(message.Body))
+	s.log.Infof("[%s] Payload: %s\n", connectionId, string(message.Body))
 
 	var proto v1.WebsocketProto
 

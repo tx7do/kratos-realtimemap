@@ -37,7 +37,7 @@ func (s *AdminService) TransitPostTelemetry(event broker.Event) error {
 			s.BroadcastVehiclePosition(s.positionHistory.GetPositionsHistory(position.VehicleId))
 		}
 
-		//fmt.Println("事件类型: ", topicInfo.EventType, " 交通工具类型: ", topicInfo.TransportMode, " 司机ID: ", topicInfo.OperatorId, " 车辆ID: ", msg.VehicleId)
+		s.log.Infof("事件类型: %s 交通工具类型: %s 司机ID: %s 车辆ID: %s", topicInfo.EventType, topicInfo.TransportMode, topicInfo.OperatorId, msg.VehicleId)
 	}
 
 	return nil

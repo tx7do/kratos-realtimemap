@@ -11,7 +11,7 @@ require (
 	github.com/google/wire v0.5.0
 	github.com/hashicorp/consul/api v1.11.0
 	github.com/nacos-group/nacos-sdk-go v1.1.0
-	github.com/tx7do/kratos-transport v0.0.0-20220312091003-a8e86b7de5cf
+	github.com/tx7do/kratos-transport v0.0.0-20220312112927-ca872b48c260
 	go.etcd.io/etcd/client/v3 v3.5.2
 	go.opentelemetry.io/otel v1.3.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.0.0
