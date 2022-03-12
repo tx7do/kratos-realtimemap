@@ -6,6 +6,7 @@ import (
 	"github.com/tx7do/kratos-transport/broker"
 	"github.com/tx7do/kratos-transport/transport/websocket"
 	v1 "kratos-realtimemap/api/admin/v1"
+	"kratos-realtimemap/app/admin/internal/pkg/data"
 )
 
 // ProviderSet is service providers.
@@ -20,13 +21,15 @@ type AdminService struct {
 	kb broker.Broker
 	ws *websocket.Server
 
-	positionHistory map[string][]*v1.Position
+	positionHistory data.PositionMap
+	viewports       data.ViewportMap
 }
 
 func NewAdminService(logger log.Logger) *AdminService {
 	l := log.NewHelper(log.With(logger, "module", "service/admin"))
 	return &AdminService{
 		log:             l,
-		positionHistory: make(map[string][]*v1.Position, 0),
+		positionHistory: make(data.PositionMap),
+		viewports:       make(data.ViewportMap),
 	}
 }

@@ -7,7 +7,7 @@ import { HubConnection } from '@/hub';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
-  name: 'GeofencingNotifications ',
+  name: 'GeofencingNotifications',
 
   props: {
     hubConnection: {

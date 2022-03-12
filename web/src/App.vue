@@ -39,7 +39,7 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.hubConnection = await new connectToHub();
+    this.hubConnection = await connectToHub;
   },
 
   async unmounted() {

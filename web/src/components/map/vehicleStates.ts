@@ -25,8 +25,9 @@ export interface VehicleState {
 export type VehicleStates = { [vehicleId: string]: VehicleState };
 
 export function handlePositionEvent(vehicleStates: VehicleStates, positionDto: PositionDto) {
-  if (!vehicleStates[positionDto.vehicleId]) {
-    vehicleStates[positionDto.vehicleId] = createVehicleFromState(positionDto);
+  if (!vehicleStates[positionDto.vehicle_id]) {
+    console.log("handlePositionEvent", positionDto)
+    vehicleStates[positionDto.vehicle_id] = createVehicleFromState(positionDto);
   }
 
   updateVehicleFromEvent(vehicleStates, positionDto);
@@ -34,7 +35,7 @@ export function handlePositionEvent(vehicleStates: VehicleStates, positionDto: P
 
 function createVehicleFromState(e: PositionDto): VehicleState {
   return {
-    vehicleId: e.vehicleId,
+    vehicleId: e.vehicle_id,
     speed: 0,
     steps: 0,
     nextPosition: { lng: e.longitude, lat: e.latitude, heading: e.heading },
@@ -49,7 +50,7 @@ function updateVehicleFromEvent(
   vehicleStates: VehicleStates,
   positionDto: PositionDto,
 ) {
-  const vehicleState = vehicleStates[positionDto.vehicleId];
+  const vehicleState = vehicleStates[positionDto.vehicle_id];
 
   vehicleState.currentPosition = {
     lat: positionDto.latitude,
@@ -96,7 +97,7 @@ function updateVehicleFromEvent(
   //   vehicleState.delta.lng != 0 ||
   //   vehicleState.delta.heading != 0;
 
-  if (positionDto.doorsOpen) {
+  if (positionDto.doors_open) {
     //console.log("doors open...")
     vehicleState.icon = 'doors-open';
   } else if (

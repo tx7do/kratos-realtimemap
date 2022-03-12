@@ -3,16 +3,16 @@ export interface PositionsDto {
 }
 
 export interface PositionDto {
-  vehicleId: string;
+  vehicle_id: string;
   longitude: number;
   latitude: number;
   heading: number;
   speed: number;
-  doorsOpen: boolean;
+  doors_open: boolean;
 }
 
 export interface WebsocketProto {
-  eventId: string;
+  event_id: string;
   payload: string;
 }
 
@@ -53,12 +53,7 @@ function ByteBufferToObject(buff) {
 }
 
 function StringToArrayBuffer(str) {
-  const buf = new ArrayBuffer(str.length * 2); // 每个字符占用2个字节
-  const bufView = new Uint16Array(buf);
-  for (let i = 0, strLen = str.length; i < strLen; i++) {
-    bufView[i] = str.charCodeAt(i);
-  }
-  return buf;
+  return new TextEncoder().encode(str);
 }
 
 class WebsocketConnect implements HubConnection {
@@ -67,26 +62,25 @@ class WebsocketConnect implements HubConnection {
   private onNotificationCallback?: (notification: string) => void;
 
   constructor() {
-
     const wsURL = `ws://localhost:7700/`;
     this.connection = new WebSocket(wsURL);
     this.connection.binaryType = 'arraybuffer';
-    this.connection.onopen = this.onWebsocketOpen;
-    this.connection.onerror = this.onWebsocketError;
-    this.connection.onmessage = this.onWebsocketMessage;
-    this.connection.onclose = this.onWebsocketClose;
+    this.connection.onopen = this.onWebsocketOpen.bind(this);
+    this.connection.onerror = this.onWebsocketError.bind(this);
+    this.connection.onmessage = this.onWebsocketMessage.bind(this);
+    this.connection.onclose = this.onWebsocketClose.bind(this);
   }
 
-  onWebsocketOpen(e) {
-    console.log('ws连接成功', e);
+  onWebsocketOpen(event) {
+    console.log('ws连接成功', event);
   }
 
-  onWebsocketError(e) {
-    console.error('ws错误', e);
+  onWebsocketError(event) {
+    console.error('ws错误', event);
   }
 
-  onWebsocketMessage(evt) {
-    const proto = ByteBufferToObject(evt.data);
+  onWebsocketMessage(event) {
+    const proto = ByteBufferToObject(event.data);
     // console.log(proto);
     const data = JSON.parse(proto['payload']);
     // console.log(data);
@@ -103,16 +97,18 @@ class WebsocketConnect implements HubConnection {
     }
   }
 
-  onWebsocketClose(e) {
-    console.log('ws连接关闭', e);
+  onWebsocketClose(event) {
+    console.log('ws连接关闭', event);
   }
 
   sendMessage(eventId, data) {
     const x: WebsocketProto = {
-      eventId: eventId,
-      payload: data,
-    }
-    this.connection.send(StringToArrayBuffer(x));
+      event_id: eventId,
+      payload: JSON.stringify(data),
+    };
+    const str = JSON.stringify(x);
+    // console.log(str);
+    this.connection.send(StringToArrayBuffer(str));
   }
 
   setViewport(swLng: number, swLat: number, neLng: number, neLat: number) {
@@ -129,17 +125,17 @@ class WebsocketConnect implements HubConnection {
     this.sendMessage('viewport', x);
   }
 
-  onPositions(callback) {
+  onPositions(callback: (positions: PositionDto[]) => void) {
     this.onPositionsCallback = callback;
   }
 
-  onNotification(callback) {
+  onNotification(callback: (notification: string) => void) {
     this.onNotificationCallback = callback;
   }
 
   async disconnect() {
-    await this.connection.close(0);
+    await this.connection.close(1000);
   }
 }
 
-export const connectToHub = WebsocketConnect;
+export const connectToHub = new WebsocketConnect;

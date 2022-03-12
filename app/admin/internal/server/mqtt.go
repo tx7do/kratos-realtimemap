@@ -1,10 +1,7 @@
 package server
 
 import (
-	"context"
-
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/tx7do/kratos-transport/broker"
 	"github.com/tx7do/kratos-transport/transport/mqtt"
 
 	"kratos-realtimemap/app/admin/internal/conf"
@@ -13,19 +10,14 @@ import (
 
 // NewMQTTServer create a mqtt server.
 func NewMQTTServer(c *conf.Server, _ log.Logger, s *service.AdminService) *mqtt.Server {
-	ctx := context.Background()
+	//ctx := context.Background()
 
 	srv := mqtt.NewServer(
-		broker.Addrs(c.Mqtt.Addr),
-		broker.OptionContext(ctx),
+		mqtt.Address(c.Mqtt.Addr),
+		mqtt.Subscribe("/hfp/v2/journey/ongoing/vp/bus/#", s.TransitPostTelemetry),
 	)
 
 	s.SetMqttBroker(srv)
-
-	_ = srv.RegisterSubscriber("/hfp/v2/journey/ongoing/vp/bus/#",
-		s.TransitPostTelemetry,
-		broker.SubscribeContext(ctx),
-	)
 
 	return srv
 }
